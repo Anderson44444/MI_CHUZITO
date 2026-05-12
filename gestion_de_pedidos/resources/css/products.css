@@ -1,0 +1,237 @@
+/* Fuente */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+@import './products.css';
+
+/* ===== ESTILO GENERAL ===== */
+
+body {
+    background: #fff8f2;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* ===== HEADER ===== */
+
+.titulo {
+    font-size: 42px;
+    text-align: center;
+    color: #ff6b35;
+    font-weight: 700;
+}
+
+/* BOTÓN CARRITO */
+.btn-carrito {
+    position: absolute;
+    right: 20px;
+    top: 10px;
+    background: #ff6b35;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 50%;
+    font-size: 18px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    transition: 0.3s;
+}
+
+.btn-carrito:hover {
+    background: #ff3d00;
+    transform: scale(1.1);
+}
+
+/* ===== GRID ===== */
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 25px;
+    margin-top: 40px;
+}
+
+/* ===== TARJETAS ===== */
+
+.card {
+    background: white;
+    padding: 20px;
+    border-radius: 18px;
+    text-align: center;
+    box-shadow: 0 8px 25px rgba(255, 107, 53, 0.15);
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+}
+
+/* NOMBRE */
+.card h2 {
+    color: #333;
+    margin-bottom: 10px;
+}
+
+/* PRECIO */
+.price {
+    color: #2ecc71;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/* BOTÓN AGREGAR */
+.agregar {
+    margin-top: 10px;
+    background: linear-gradient(45deg, #ff6b35, #ff9f1c);
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.agregar:hover {
+    transform: scale(1.05);
+}
+
+/* ===== CARRITO ===== */
+
+.carrito {
+    position: fixed;
+    right: 20px;
+    top: 20px;
+    width: 320px;
+    background: white;
+    padding: 20px;
+    border-radius: 18px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    border-top: 5px solid #ff6b35;
+}
+
+/* HEADER CARRITO */
+.carrito-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #ff6b35;
+}
+
+/* ITEMS */
+.item {
+    background: #fff3e6;
+    padding: 12px;
+    border-radius: 12px;
+    margin-top: 10px;
+}
+
+/* BOTONES CANTIDAD */
+.acciones {
+    display: flex;
+    gap: 10px;
+    margin: 5px 0;
+}
+
+.acciones button {
+    background: #ff9f1c;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 6px;
+    color: white;
+    cursor: pointer;
+}
+
+/* ELIMINAR */
+.eliminar {
+    background: none;
+    border: none;
+    color: #ff3d00;
+    font-size: 14px;
+}
+
+/* TOTAL */
+h3 {
+    color: #ff6b35;
+}
+
+/* BOTÓN FINAL */
+.pedido {
+    width: 100%;
+    background: linear-gradient(45deg, #ff6b35, #ff3d00);
+    color: white;
+    padding: 12px;
+    border-radius: 12px;
+    border: none;
+    margin-top: 15px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.pedido:hover {
+    transform: scale(1.05);
+}
+
+body{
+    overflow-y: auto;
+}
+
+.layout{
+    min-height: 100vh;
+    padding-bottom: 50px;
+}
+
+.carrito{
+    max-height: 90vh;
+    overflow-y: auto;
+    
+}
+
+.btn-historial{
+    position: fixed;
+    right: 20px;
+    top: 180px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: none;
+    background: #eb6645;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    box-shadow: 0 8px 20px rgba(0,0,0,.15);
+    z-index: 1000;
+}
+
+.panel-historial{
+    position: fixed;
+    right: 90px;
+    top: 180px;
+    width: 420px;
+    height: 650px;
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0,0,0,.15);
+    z-index: 999;
+}
+select{
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+}
+
+.extras{
+    margin-top: 10px;
+    text-align: left;
+}
+
+.extra-title{
+    margin-top: 10px;
+    font-weight: bold;
+    color: #ff6b35;
+}
+
+.extras label{
+    display: block;
+    margin-top: 5px;
+    font-size: 14px;
+}
+@import './products.css';
