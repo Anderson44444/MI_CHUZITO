@@ -1,18 +1,55 @@
 <script setup>
+import { jsPDF } from 'jspdf';
+import autoTable from 'jspdf-autotable';
+import * as XLSX from 'xlsx';
+
 const props = defineProps({
     entregas: Array,
     promedioMinutos: Number,
     desde: String,
     hasta: String,
 });
- 
+
 const filtrar = () => {
     const desde = document.getElementById('desde').value;
     const hasta = document.getElementById('hasta').value;
     window.location.href = '/reports/tiempos?desde=' + desde + '&hasta=' + hasta;
 };
+
+const descargarPDF = () => {
+    const doc = new jsPDF();
+    doc.setFontSize(18);
+    doc.text('Reporte de Tiempos de Entrega - Mi Chuzito', 14, 20);
+    doc.setFontSize(11);
+    doc.text('Periodo: ' + props.desde + ' al ' + props.hasta, 14, 30);
+    doc.text('Promedio de entrega: ' + props.promedioMinutos + ' minutos', 14, 38);
+
+    autoTable(doc, {
+        startY: 47,
+        head: [['Pedido', 'Cliente', 'Repartidor', 'Inicio', 'Entrega', 'Minutos']],
+        body: props.entregas.map(e => [e.id, e.customer_name, e.delivery_person, e.started_at, e.delivered_at, e.minutos + ' min']),
+    });
+
+    doc.save('reporte-tiempos-' + props.desde + '-' + props.hasta + '.pdf');
+};
+
+const descargarExcel = () => {
+    const data = props.entregas.map(e => ({
+        'Pedido': e.id,
+        'Cliente': e.customer_name,
+        'Repartidor': e.delivery_person,
+        'Inicio': e.started_at,
+        'Entrega': e.delivered_at,
+        'Minutos': e.minutos,
+    }));
+
+    const wb = XLSX.utils.book_new();
+    const ws = XLSX.utils.json_to_sheet(data);
+    XLSX.utils.book_append_sheet(wb, ws, 'Tiempos');
+    XLSX.writeFile(wb, 'reporte-tiempos-' + props.desde + '-' + props.hasta + '.xlsx');
+};
 </script>
- 
+
 <template>
 <div class="min-h-screen bg-gray-100 py-8 px-4">
     <div class="max-w-5xl mx-auto">
@@ -20,7 +57,7 @@ const filtrar = () => {
             <h1 class="text-3xl font-bold text-gray-800">Reporte de Tiempos de Entrega</h1>
             <a href="/reports" class="text-gray-500 text-sm">Volver a reportes</a>
         </div>
-        <div class="bg-white rounded-xl shadow p-4 mb-6 flex gap-4 items-end">
+        <div class="bg-white rounded-xl shadow p-4 mb-6 flex gap-4 items-end flex-wrap">
             <div>
                 <label class="block text-sm font-medium text-gray-700 mb-1">Desde</label>
                 <input type="date" id="desde" :value="desde" class="border border-gray-300 rounded-lg px-3 py-2" />
@@ -30,6 +67,8 @@ const filtrar = () => {
                 <input type="date" id="hasta" :value="hasta" class="border border-gray-300 rounded-lg px-3 py-2" />
             </div>
             <button @click="filtrar" class="bg-green-500 text-white px-4 py-2 rounded-lg font-semibold">Filtrar</button>
+            <button @click="descargarPDF" class="bg-red-500 text-white px-4 py-2 rounded-lg font-semibold">Descargar PDF</button>
+            <button @click="descargarExcel" class="bg-emerald-600 text-white px-4 py-2 rounded-lg font-semibold">Descargar Excel</button>
         </div>
         <div class="bg-white rounded-xl shadow p-6 mb-6">
             <p class="text-gray-500 text-sm">Promedio de Tiempo de Entrega</p>
